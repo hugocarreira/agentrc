@@ -1,98 +1,118 @@
 # Latest Discoveries (May 2026)
 
 ## Sources Analyzed
-- Simon Willison: "Parallel Agents", "Agentic Loops", "Vibe Engineering"
-- Jesse Vincent: "How I'm using coding agents"
-- Anthropic: "Claude Code Best Practices"  
-- Josh Snyder (Sketch.dev): "7 Prompting Habits"
-- Peter Steinberger: Gists (MCP CLI, git rules, worktrees)
+- Peter Steinberger: "Just Talk To It", "Shipping at Inference-Speed"
+- Simon Willison: "Vibe Engineering" (LLMs amplify senior engineering practices)
+- Armin Ronacher: "Plan Mode Is Just a Prompt"
+- Anthropic: "Claude Code Best Practices" (context management)
 
-## Key Insights
+## Key Insights Applied
 
-### 1. YOLO Mode = Critical for Productivity
-Auto-approve everything, but do it safely:
-- Docker containers (restrict files + network)
-- GitHub Codespaces (someone else's computer)
-- Allowlist network access (prevent exfiltration)
+### 1. Just Talk To It (Peter Steinberger)
+Short prompts + screenshots. Natural conversation. No elaborate setups.
+```
+✅ "add login button"
+✅ [screenshot] "fix padding"
+✅ "look at ../other-project and do same"
 
-"An AI agent is an LLM wrecking its environment in a loop." - Solomon Hykes
+❌ "I need you to carefully analyze..."
+```
 
-### 2. Parallel Agents (Run 3-8 instances!)
-Patterns:
-- **Research/PoCs**: "Can library X work?"
-- **"How does this work?"**: Explain existing code
-- **Small maintenance**: "Fix this deprecation warning"
-- **Architect/Implementer**: Separate design from execution
-- **Send out a scout**: Learn from agent's mistakes without making them
-
-### 3. Architect/Implementer Pattern (Jesse Vincent)
-Two separate sessions:
-- **Architect**: Brainstorm → Plan → Review
-- **Implementer**: Execute plan in chunks, /clear between each
-- Architect resets with double-ESC (no bias)
-- Copy reviews between sessions (PM role)
-
-Why: Implementer has clean context, Architect keeps design intent
-
-### 4. Designing Agentic Loops (Simon Willison)
-Look for: clear success criteria + trial/error needed
-- Debugging (tests pass)
-- Performance (benchmark improves)
-- Upgrades (tests still pass)
-- Container optimization (smaller + tests pass)
-
-### 5. Context Management = CRITICAL
+### 2. Context Management = Critical
 Context window fills fast. Performance degrades.
 
 Strategies:
 - `/clear` between unrelated tasks
 - `/compact` to summarize (keeps decisions, frees space)
-- Subagents for investigation (separate context!)
 - `/btw` for quick questions (doesn't enter history)
 - After 2 corrections, /clear and restart with better prompt
 
-### 6. "Give Claude a way to verify" = Highest Leverage
-Tests, screenshots, expected outputs
-Agent can check itself = dramatically better performance
+### 3. "Give Agent a Way to Verify" = Highest Leverage
+Tests, screenshots, expected outputs.
+Agent can check itself = dramatically better performance.
 
-### 7. AGENTS.md / CLAUDE.md Must Be SHORT
-If too long, agent ignores it.
-Ruthlessly prune. Only include what agent can't infer.
-
-### 8. Git Worktrees for Isolation
-```bash
-cd .worktrees
-git worktree add feature-name
-cd feature-name
-npm install
-claude  # isolated!
+```
+Before: "make dashboard look better"
+After:  "[screenshot] implement this. Take screenshot,
+        compare to original, list differences, fix them"
 ```
 
-Run 3-4 parallel features on same repo.
+### 4. AGENTS.md Must Be SHORT
+If too long → agent ignores it.
+Ruthlessly prune. Only include what agent can't infer from code.
 
-### 9. CLI Tools > MCPs
-MCPs pollute context (GitHub MCP = 23k tokens!)
+✅ Include: bash commands, code style diffs, test commands, gotchas
+❌ Exclude: standard conventions, API docs, file descriptions
+
+### 5. CLI Tools > MCPs
+MCPs pollute context (GitHub MCP = 23k tokens!).
 Use: gh, vercel, psql, bun
 
-MCP via CLI (Peter): pnpm mcp:call (progressive disclosure)
+### 6. "Fresh Eyes" Magic Phrase
+When agent finishes work:
+```
+"Review your own code with fresh eyes. Look for edge cases,
+missing tests, performance issues, security concerns."
+```
+Seems to reset bias toward code it just wrote.
 
-### 10. CodeRabbit Review with Role-Play
-"Should we hire this reviewer? Which issues to fix?"
-Prevents credulous acceptance of bad suggestions.
+### 7. Blast Radius Thinking
+Before starting, ask yourself:
+- How many files?
+- How long?
+- Can I context-switch if needed?
 
-## What Changed in Our System
-- Added parallel agent patterns
-- Added YOLO mode safety guidelines
-- Added agentic loop design
-- Added Architect/Implementer workflow
-- Added context management strategies
-- Added "send out a scout" pattern
-- Emphasized "give agent way to verify" as highest leverage
-- Added git worktrees guide
-- Added non-interactive mode examples
+### 8. Iterate Fast, Refactor Smart
+80% building, 20% refactoring.
+Refactor when prompts get slow.
+
+### 9. Cross-Reference Projects
+```
+"look at ../other-project and do the same"
+"check how we solved X in ../vibetunnel"
+```
+Model is excellent at pattern reuse.
+
+### 10. Course Correct Early
+- ESC: stop mid-action
+- After 2 corrections: /clear + better prompt
+- Don't let bad context accumulate
+
+## What We Simplified
+
+### Removed (Over-Engineering):
+❌ Parallel agents (multi-terminal workflows)
+❌ Architect/Implementer pattern (two sessions)
+❌ Subagents for investigation
+❌ YOLO mode in Codespaces
+❌ Git worktrees (unless user asks)
+❌ Multi-agent orchestration
+❌ Complex delegation patterns
+
+### Kept (What Actually Works):
+✅ Just talk to it (short prompts + screenshots)
+✅ Test in same context (finds bugs!)
+✅ Give agent way to verify (highest leverage)
+✅ Context management (/clear, /compact, /btw)
+✅ Cross-reference projects (pattern reuse)
+✅ CLIs > MCPs (less pollution)
+✅ RTK everywhere (token efficiency)
+✅ "Fresh eyes" self-review
+✅ Course correct early (ESC, /clear)
+✅ One terminal, one agent (simplicity)
+
+## Philosophy
+
+**Single agent, single terminal, just ship.**
+
+Peter Steinberger doesn't use multi-terminal workflows.
+He uses 1 agent, talks naturally, iterates fast, ships.
+
+We follow that.
 
 ## Stats
-- AGENTS.md: 235 lines → 495 lines (but WAY more practical!)
+- AGENTS.md: 495 lines → 365 lines (simplified!)
 - Skills: 32 (unchanged)
-- Philosophy: Same (Just Talk To It)
+- Philosophy: "Just Talk To It" + essential best practices
 - Stacks unified: 3 (opencode, codex, claude)
+- Complexity: MUCH lower

@@ -62,6 +62,11 @@ cp ~/work/agent/AGENTS.template.md AGENTS.md
 # Edit with project specifics (keep SHORT!)
 ```
 
+**Your stacks:**
+- `freqly` - Go (Gin) + Next.js 16 monorepo ✅
+- `winterarc` - Express + Vite/React monorepo
+- `cko-payment-challenge` - Go (chi) standalone API
+
 ---
 
 ## Core Principles

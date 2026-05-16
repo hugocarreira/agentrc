@@ -1,44 +1,41 @@
 @/home/hugoubuntu/work/agent/RTK.md
 
+READ ~/work/agent/AGENTS.md
+
 # Codex Configuration
 
 Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
-## Core Principles (from Peter Steinberger workflow)
+## Peter Steinberger Workflow
 
+### Core Principles
 - **Just Talk To It**: Short prompts (1-2 sentences) + screenshots
-- **Shipping at Inference-Speed**: Expect code works out-of-the-box
-- **Blast Radius Thinking**: Know how many files a task will touch before starting
-- **Iterate Fast, Refactor Smart**: 80% building, 20% refactoring
+- **Shipping at Inference-Speed**: Expect one-shot success
+- **Blast Radius Thinking**: Know impact before starting
+- **Iterate Fast**: 80% building, 20% refactoring
 
-## Workflow
-- Work on `main` by default (no worktrees unless asked)
-- Atomic commits: one feature/fix per commit
+### Workflow
+- Work on `main` (no worktrees unless asked)
+- Atomic commits per feature
 - Test in same context (finds bugs automatically)
-- Cross-reference projects: "look at ../other-project and do same"
+- Cross-reference: "look at ../project and do same"
+- Queue continue messages for long tasks
 
-## Prompting Style
-- Short prompts + screenshots (~50% of prompts should include images)
+### Prompting
+- Short + screenshots (~50% include images)
 - "give me options before making changes" for big tasks
-- Show don't tell: drag screenshot + "fix padding"
+- Show don't tell: `[screenshot] "fix padding"`
 
-## Code Quality
-- Refactor when prompts get slow (~20% of time)
-- Add inline comments for tricky logic
-- Write tests after each feature (in same context)
+### Code Quality
+- Refactor when prompts slow (~20% of time)
+- Inline comments for tricky parts
+- Tests after each feature (same context!)
 
-## Git
-- Conventional Commits format
-- Only push when asked
-- No destructive ops without consent
-
-## Tools
-- **CLIs > MCPs**: Prefer `gh`, `vercel`, `psql`, `bun`
+### Tools
 - **RTK**: Always prefix shell commands (see RTK.md)
-
-## Skills
-Skills are centralized in `~/work/agent/skills/` (symlinked to `~/.codex/skills`)
+- **CLIs > MCPs**: `gh`, `vercel`, `psql`, `bun`
+- **Skills**: 32 available in `~/work/agent/skills/`
 
 ---
 
-READ ~/work/agent/AGENTS-GLOBAL.md for orchestrator rules (when using OpenCode).
+**No orchestrators. No plan mode theater. Just ship.**

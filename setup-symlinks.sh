@@ -7,6 +7,8 @@ AGENT_ROOT="$HOME/work/agent"
 
 echo "🔗 Setting up symlinks for all AI coding stacks..."
 echo ""
+echo "Philosophy: Just talk to it. No orchestrators, no charades."
+echo ""
 
 # ============================================
 # OpenCode Setup
@@ -14,18 +16,15 @@ echo ""
 echo "📦 OpenCode Configuration"
 
 # Backup existing files
-if [ -f "$HOME/.config/opencode/AGENTS.md" ]; then
+if [ -f "$HOME/.config/opencode/AGENTS.md" ] && [ ! -L "$HOME/.config/opencode/AGENTS.md" ]; then
     echo "  ↳ Backing up existing AGENTS.md"
     mv "$HOME/.config/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md.backup.$(date +%s)"
 fi
 
 # Create symlinks
 echo "  ↳ Linking AGENTS.md"
+rm -f "$HOME/.config/opencode/AGENTS.md"
 ln -sf "$AGENT_ROOT/stacks/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
-
-echo "  ↳ Linking agents/"
-rm -rf "$HOME/.config/opencode/agents"
-ln -sf "$AGENT_ROOT/agents" "$HOME/.config/opencode/agents"
 
 echo "  ↳ Linking skills/"
 rm -rf "$HOME/.config/opencode/skills"
@@ -35,6 +34,12 @@ echo "  ↳ Linking plugins/"
 rm -rf "$HOME/.config/opencode/plugins"
 ln -sf "$AGENT_ROOT/plugins" "$HOME/.config/opencode/plugins"
 
+# Remove old agents symlink if exists (we killed orchestrator)
+if [ -L "$HOME/.config/opencode/agents" ]; then
+    echo "  ↳ Removing old orchestrator agents/"
+    rm -f "$HOME/.config/opencode/agents"
+fi
+
 # ============================================
 # Codex Setup
 # ============================================
@@ -42,21 +47,23 @@ echo ""
 echo "📦 Codex Configuration"
 
 # Backup existing
-if [ -f "$HOME/.codex/AGENTS.md" ]; then
+if [ -f "$HOME/.codex/AGENTS.md" ] && [ ! -L "$HOME/.codex/AGENTS.md" ]; then
     echo "  ↳ Backing up existing AGENTS.md"
     mv "$HOME/.codex/AGENTS.md" "$HOME/.codex/AGENTS.md.backup.$(date +%s)"
 fi
 
-if [ -f "$HOME/.codex/RTK.md" ]; then
+if [ -f "$HOME/.codex/RTK.md" ] && [ ! -L "$HOME/.codex/RTK.md" ]; then
     echo "  ↳ Backing up existing RTK.md"
     mv "$HOME/.codex/RTK.md" "$HOME/.codex/RTK.md.backup.$(date +%s)"
 fi
 
 # Create symlinks
 echo "  ↳ Linking AGENTS.md"
+rm -f "$HOME/.codex/AGENTS.md"
 ln -sf "$AGENT_ROOT/stacks/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
 
 echo "  ↳ Linking RTK.md"
+rm -f "$HOME/.codex/RTK.md"
 ln -sf "$AGENT_ROOT/RTK.md" "$HOME/.codex/RTK.md"
 
 echo "  ↳ Linking skills/"
@@ -70,29 +77,32 @@ echo ""
 echo "📦 Claude Code Configuration"
 
 # Backup existing
-if [ -f "$HOME/.claude/CLAUDE.md" ]; then
+if [ -f "$HOME/.claude/CLAUDE.md" ] && [ ! -L "$HOME/.claude/CLAUDE.md" ]; then
     echo "  ↳ Backing up existing CLAUDE.md"
     mv "$HOME/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md.backup.$(date +%s)"
 fi
 
-if [ -f "$HOME/.claude/AGENTS.md" ]; then
+if [ -f "$HOME/.claude/AGENTS.md" ] && [ ! -L "$HOME/.claude/AGENTS.md" ]; then
     echo "  ↳ Backing up existing AGENTS.md"
     mv "$HOME/.claude/AGENTS.md" "$HOME/.claude/AGENTS.md.backup.$(date +%s)"
 fi
 
-if [ -f "$HOME/.claude/RTK.md" ]; then
+if [ -f "$HOME/.claude/RTK.md" ] && [ ! -L "$HOME/.claude/RTK.md" ]; then
     echo "  ↳ Backing up existing RTK.md"
     mv "$HOME/.claude/RTK.md" "$HOME/.claude/RTK.md.backup.$(date +%s)"
 fi
 
 # Create symlinks
 echo "  ↳ Linking CLAUDE.md"
+rm -f "$HOME/.claude/CLAUDE.md"
 ln -sf "$AGENT_ROOT/stacks/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
-echo "  ↳ Linking AGENTS.md"
+echo "  ↳ Linking AGENTS.md (points to CLAUDE.md)"
+rm -f "$HOME/.claude/AGENTS.md"
 ln -sf "$AGENT_ROOT/stacks/claude/CLAUDE.md" "$HOME/.claude/AGENTS.md"
 
 echo "  ↳ Linking RTK.md"
+rm -f "$HOME/.claude/RTK.md"
 ln -sf "$AGENT_ROOT/RTK.md" "$HOME/.claude/RTK.md"
 
 echo "  ↳ Linking skills/"
@@ -106,13 +116,15 @@ echo ""
 echo "✅ Symlink setup complete!"
 echo ""
 echo "📍 All stacks now point to:"
-echo "   • Agent configs: $AGENT_ROOT/stacks/{opencode,codex,claude}/"
+echo "   • Core rules: $AGENT_ROOT/AGENTS.md"
+echo "   • Stack configs: $AGENT_ROOT/stacks/{opencode,codex,claude}/"
 echo "   • Skills: $AGENT_ROOT/skills/"
-echo "   • Agents: $AGENT_ROOT/agents/"
 echo "   • RTK config: $AGENT_ROOT/RTK.md"
 echo ""
 echo "🔍 Verify with:"
 echo "   ls -la ~/.config/opencode/AGENTS.md"
 echo "   ls -la ~/.codex/AGENTS.md"
 echo "   ls -la ~/.claude/CLAUDE.md"
+echo ""
+echo "🎯 Philosophy: Just talk to it. No orchestrators, no charades."
 echo ""

@@ -1,17 +1,48 @@
-READ ~/work/agent/AGENTS-GLOBAL.md BEFORE ANYTHING.
+READ ~/work/agent/AGENTS.md BEFORE ANYTHING.
 
-# OpenCode-Specific Configuration
+# OpenCode Configuration
 
-This file is symlinked to `~/.config/opencode/AGENTS.md`
+**No orchestrator. Just talk to it.**
 
-## Stack Preference
-- Primary harness: OpenCode (orchestrator-based)
-- Uses specialized agents for domain-specific work
-- Follows orchestrator-first architecture
+## Why No Orchestrator?
 
-## Agent System
-All agents are defined in `~/work/agent/agents/`
-Skills are centralized in `~/work/agent/skills/`
+The orchestrator-first architecture is over-engineering:
+- Peter Steinberger: "Don't waste time on subagents, Agents 2.0, or charades"
+- Armin Ronacher: "Plan mode is just a prompt + UX"
+- Simon Willison: "Senior engineers don't need orchestration theater"
 
-## RTK Integration
-See `~/work/agent/RTK.md` for token optimization rules.
+Instead: Natural conversation → Implementation → Tests → Ship
+
+## OpenCode-Specific
+
+- Can use skills from `~/work/agent/skills/`
+- RTK for token optimization (see `RTK.md`)
+- Cross-reference projects with `../project-name`
+- Work on main, iterate fast
+
+## Usage
+
+```bash
+# Just talk naturally
+"add login button"
+"refactor auth to use tokens"
+"write tests for user service"
+"look at ../vibetunnel and do same for sessions"
+```
+
+No need for:
+- ❌ Orchestrator delegation
+- ❌ Agent spawning
+- ❌ Briefing templates
+- ❌ Contracts and reporting
+- ❌ Quality gate ceremonies
+
+Just:
+- ✅ Short prompts
+- ✅ Natural iteration
+- ✅ Test in same context
+- ✅ Ship
+
+---
+
+**Keep it simple. The model is smart enough.**

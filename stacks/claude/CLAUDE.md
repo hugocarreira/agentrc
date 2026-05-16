@@ -1,45 +1,46 @@
 @/home/hugoubuntu/work/agent/RTK.md
 
+READ ~/work/agent/AGENTS.md
+
 # Claude Code Configuration
 
 Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
-## Core Principles
+## Just Talk To It
 
-- **Just Talk To It**: Natural conversation, short prompts
-- **Blast Radius Thinking**: Assess impact before starting
-- **Iterate Fast**: Build → Test → Ship
-- **Test in Same Context**: Write tests immediately after implementation
+- Short prompts + screenshots
+- Natural conversation, no elaborate setups
+- "give me options" when uncertain
+- Iterate together
 
 ## Workflow
 - Work on `main` by default
-- Atomic commits with Conventional Commits format
-- Cross-reference projects for reusing patterns
+- Atomic commits (Conventional Commits format)
+- Test in same context after implementation
+- Cross-reference projects: "look at ../other and do same"
 - Queue continue messages for long tasks
 
 ## Prompting
-- Short prompts (1-2 sentences) + screenshots
-- "give me options" for uncertainty
+- Short (1-2 sentences) + screenshots when useful
 - Show with images when possible
+- Trigger words for hard tasks: "take your time", "comprehensive"
 
 ## Code Quality
-- Refactor ~20% of time
-- Tests for business logic
+- Refactor ~20% of time (when prompts slow)
+- Tests for business logic (same context!)
 - Comments on tricky parts
 - No secrets in code
 
-## Git
-- Conventional Commits (`feat:`, `fix:`, `refactor:`, etc.)
-- Only push when explicitly asked
-- No force push without permission
-
 ## Tools
 - **RTK**: Token-optimized CLI proxy (see RTK.md)
-- **CLIs > MCPs**: Prefer native CLIs (`gh`, `vercel`, `psql`)
+- **CLIs > MCPs**: Prefer `gh`, `vercel`, `psql`
+- **Skills**: 32 in `~/work/agent/skills/` (auto-discovered)
 
-## Skills
-Skills are centralized in `~/work/agent/skills/` (symlinked to `~/.claude/skills`)
+## Git
+- Conventional Commits (`feat:`, `fix:`, `refactor:`)
+- Only push when asked
+- No force push without permission
 
 ---
 
-READ ~/work/agent/AGENTS-GLOBAL.md for full orchestrator rules (when using OpenCode).
+**No orchestrator. No plan mode theater. Just talk and ship.**

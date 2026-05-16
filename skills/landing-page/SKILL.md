@@ -108,3 +108,100 @@ When creating a landing page:
 2. Write the actual copy for each section.
 3. Implement as clean HTML/React with Tailwind.
 4. Note where placeholder content (screenshots, logos, testimonials) is needed.
+
+---
+
+## CRO Analysis Framework
+
+When reviewing or optimizing a landing page, analyze across these dimensions (in order of impact):
+
+### 1. Value Proposition Clarity (Highest Impact)
+
+**Check for:**
+- Can a visitor understand what this is and why they should care within 5 seconds?
+- Is the primary benefit clear, specific, and differentiated?
+- Is it written in the customer's language (not company jargon)?
+
+**Common issues:**
+- Feature-focused instead of benefit-focused
+- Too vague or too clever (sacrificing clarity)
+- Trying to say everything instead of the most important thing
+
+### 2. Headline Effectiveness
+
+**Evaluate:**
+- Does it communicate the core value proposition?
+- Is it specific enough to be meaningful?
+- Does it match the traffic source's messaging?
+
+**Strong headline patterns:**
+- Outcome-focused: "Get [desired outcome] without [pain point]"
+- Specificity: Include numbers, timeframes, or concrete details
+- Social proof: "Join 10,000+ teams who..."
+
+### 3. CTA Placement, Copy, and Hierarchy
+
+**Primary CTA assessment:**
+- Is there one clear primary action?
+- Is it visible without scrolling?
+- Does the button copy communicate value, not just action?
+  - Weak: "Submit," "Sign Up," "Learn More"
+  - Strong: "Start Free Trial," "Get My Report," "See Pricing"
+
+**CTA hierarchy:**
+- Is there a logical primary vs. secondary CTA structure?
+- Are CTAs repeated at key decision points?
+
+### 4. Trust Signals and Social Proof
+
+**Types to look for:**
+- Customer logos (especially recognizable ones)
+- Testimonials (specific, attributed, with photos)
+- Case study snippets with real numbers
+- Review scores and counts
+- Security badges (where relevant)
+
+**Placement:** Near CTAs and after benefit claims
+
+### 5. Friction Points
+
+**Look for:**
+- Too many form fields
+- Unclear next steps
+- Confusing navigation
+- Required information that shouldn't be required
+- Mobile experience issues
+- Long load times
+
+---
+
+## Page-Specific CRO Considerations
+
+### Homepage CRO
+- Clear positioning for cold visitors
+- Quick path to most common conversion
+- Handle both "ready to buy" and "still researching"
+
+### Pure Landing Page (Paid Traffic)
+- Message match with traffic source
+- Single CTA (remove navigation if possible)
+- Complete argument on one page
+
+### Pricing Page CRO
+- Clear plan comparison
+- Recommended plan indication
+- Address "which plan is right for me?" anxiety
+
+### Feature Page CRO
+- Connect feature to benefit
+- Use cases and examples
+- Clear path to try/buy
+
+### Blog Post CRO
+- Contextual CTAs matching content topic
+- Inline CTAs at natural stopping points
+
+---
+
+## For comprehensive CRO experiment ideas, see: @_references/cro-experiments.md
+

@@ -441,3 +441,79 @@ startTransition(() => setExpensiveState(newValue));
 - [web.dev INP](https://web.dev/articles/inp)
 - [web.dev CLS](https://web.dev/articles/cls)
 - [Performance skill](../performance/SKILL.md)
+
+---
+
+## Performance Targets
+
+### Core Web Vitals Thresholds
+
+- **LCP (Largest Contentful Paint):**
+  - Good: < 2.5s
+  - Needs Improvement: 2.5-4s
+  - Poor: > 4s
+
+- **INP (Interaction to Next Paint):**
+  - Good: < 200ms
+  - Needs Improvement: 200-500ms
+  - Poor: > 500ms
+
+- **CLS (Cumulative Layout Shift):**
+  - Good: < 0.1
+  - Needs Improvement: 0.1-0.25
+  - Poor: > 0.25
+
+---
+
+## Accessibility Quick Checks
+
+(Related to visual stability and user experience)
+
+### Color Contrast
+- Text: 4.5:1 minimum ratio
+- UI components: 3:1 minimum ratio
+- Large text (18pt+): 3:1 minimum
+
+### Keyboard Navigation
+- All interactive elements accessible via Tab
+- Visible focus indicators
+- Logical tab order
+
+### ARIA & Semantics
+- Proper ARIA labels on interactive elements
+- Semantic HTML (nav, main, article, etc.)
+- Alt text on images
+
+---
+
+## Issue Severity Framework
+
+| Severity | Impact | Action |
+|----------|--------|--------|
+| **Critical** | Blocking user actions, site unusable | Fix immediately |
+| **High** | Poor UX, likely conversion loss | Fix this sprint |
+| **Medium** | Suboptimal experience | Prioritize in backlog |
+| **Low** | Nice-to-have improvement | Optional/future |
+
+---
+
+## Audit Cadence Checklist
+
+### Before Deploy
+- [ ] Run Lighthouse audit
+- [ ] Check Core Web Vitals (LCP, INP, CLS)
+- [ ] Test on mobile device
+- [ ] Basic accessibility scan
+- [ ] SEO meta tags present
+
+### Weekly
+- [ ] Performance regression check
+- [ ] Monitor CWV in production
+- [ ] Review error logs
+
+### Monthly
+- [ ] Full Lighthouse audit
+- [ ] Accessibility audit
+- [ ] SEO health check
+- [ ] Compare against competitors
+

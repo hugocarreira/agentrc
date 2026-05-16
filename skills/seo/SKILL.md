@@ -27,6 +27,22 @@ Search ranking factors (approximate influence):
 
 ---
 
+
+## ⚠️ Schema Markup Detection Limitation
+
+**`web_fetch` and `curl` cannot reliably detect structured data / schema markup.**
+
+Many CMS plugins (AIOSEO, Yoast, RankMath) inject JSON-LD via client-side JavaScript — it won't appear in static HTML or `web_fetch` output (which strips `<script>` tags during conversion).
+
+**To accurately check for schema markup, use one of these methods:**
+1. **Browser tool** — render the page and run: `document.querySelectorAll('script[type="application/ld+json"]')`
+2. **Google Rich Results Test** — https://search.google.com/test/rich-results
+3. **Screaming Frog export** — if the client provides one, use it (SF renders JavaScript)
+
+Reporting "no schema found" based solely on `web_fetch` or `curl` leads to false audit findings.
+
+---
+
 ## Technical SEO
 
 ### Crawlability
@@ -513,3 +529,40 @@ body {
 - [Schema.org](https://schema.org/)
 - [Core Web Vitals](../core-web-vitals/SKILL.md)
 - [Web Quality Audit](../web-quality-audit/SKILL.md)
+
+---
+
+## Common SEO Issues by Site Type
+
+### SaaS/Product Sites
+- Missing /features pages for long-tail keywords
+- No comparison pages ("X vs Y", "X alternative")
+- Pricing page not indexed or blocked
+- Product screenshots without alt text
+- No structured data for SoftwareApplication
+
+### E-commerce
+- Thin product descriptions
+- Faceted navigation creating duplicate content
+- Out-of-stock pages returning 200 instead of 410
+- Missing product schema
+- Slow image loading
+
+### Content/Blog Sites
+- Keyword cannibalization (multiple posts targeting same term)
+- Outdated content not updated or removed
+- Thin content (<300 words)
+- No internal linking strategy
+- Missing breadcrumbs
+
+### Local Business
+- Missing or incomplete Google Business Profile
+- No NAP consistency (Name, Address, Phone)
+- Missing LocalBusiness schema
+- No location pages for multi-location
+- Mobile experience issues
+
+---
+
+## For AI writing detection patterns to avoid, see: @_references/ai-writing-detection.md
+

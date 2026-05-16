@@ -10,7 +10,7 @@ Philosophy: Just talk to it. Give agent way to verify. Ship fast.
 
 ```bash
 cd ~/work/agent
-./setup-symlinks.sh
+./scripts/setup-symlinks.sh
 ```
 
 Creates symlinks:
@@ -56,11 +56,19 @@ skills/              → ~/work/agent/skills/ (all stacks)
 ```
 
 ### Add to Projects
+
+**New project:**
 ```bash
-cd ~/work/my-project
-cp ~/work/agent/AGENTS.template.md AGENTS.md
-# Pick one option (Go+Next.js, Express+React, or Go API)
-# Edit with project specifics (keep SHORT!)
+cd ~/work/agent
+./scripts/setup-new-project.sh my-project
+# Edit ~/work/my-project/AGENTS.md
+```
+
+**Existing project:**
+```bash
+cd ~/work/agent
+./scripts/setup-existing-project.sh my-project
+# Adds global reference, backs up original
 ```
 
 ---

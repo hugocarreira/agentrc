@@ -57,18 +57,10 @@ skills/              → ~/work/agent/skills/ (all stacks)
 
 ### Add to Projects
 
-**New project:**
 ```bash
 cd ~/work/agent
-./scripts/setup-new-project.sh my-project
-# Edit ~/work/my-project/AGENTS.md
-```
-
-**Existing project:**
-```bash
-cd ~/work/agent
-./scripts/setup-existing-project.sh my-project
-# Adds global reference, backs up original
+./scripts/setup-project.sh
+# Interactive: asks project name + option (new/existing)
 ```
 
 ---

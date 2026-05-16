@@ -34,24 +34,24 @@ ls -la ~/.claude/skills/
 
 ### 2. Per-Project Setup
 
-**For NEW projects** (no AGENTS.md yet):
+**Interactive (recommended):**
 ```bash
 cd ~/work/agent
-./scripts/setup-new-project.sh <project-name>
+./scripts/setup-project.sh
 
-# Example:
-./scripts/setup-new-project.sh my-app
-# Creates: ~/work/my-app/AGENTS.md from template
+# Prompts:
+# - Project name
+# - Option 1: New project (create AGENTS.md)
+# - Option 2: Existing project (add global reference)
 ```
 
-**For EXISTING projects** (has AGENTS.md):
+**Or use individual scripts:**
 ```bash
-cd ~/work/agent
-./scripts/setup-existing-project.sh <project-name>
+# New project
+./scripts/setup-new-project.sh <project-name>
 
-# Example:
-./scripts/setup-existing-project.sh my-app
-# Adds global reference to existing ~/work/my-app/AGENTS.md
+# Existing project
+./scripts/setup-existing-project.sh <project-name>
 ```
 
 **Note:** All scripts assume your projects are in `~/work/`
@@ -195,6 +195,13 @@ All scripts in `~/work/agent/scripts/`:
 **setup-symlinks.sh**
 - Run once to setup global environment
 - Creates symlinks for all 3 harnesses
+- Usage: `./scripts/setup-symlinks.sh`
+
+**setup-project.sh** (recommended)
+- Interactive project setup
+- Prompts for project name and option
+- Detects existing AGENTS.md automatically
+- Usage: `./scripts/setup-project.sh`
 
 **setup-new-project.sh <name>**
 - For new projects (no AGENTS.md)

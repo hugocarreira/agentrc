@@ -30,11 +30,21 @@ skills/              → ~/work/agent/skills/ (all stacks)
 ├── AGENTS.md              # Core rules (start here!)
 ├── QUICK-REFERENCE.md     # Daily cheatsheet
 ├── RTK.md                 # Token optimization
+├── SETUP.md               # Complete setup guide
+├── CHANGELOG.md           # Version history
 │
-├── skills/                # 32 reusable workflows
+├── skills/                # 26 reusable workflows
+│   ├── _references/       # Knowledge base docs
+│   └── README.md          # Skills catalog
+├── scripts/               # Automation scripts
+│   ├── setup-symlinks.sh  # Global setup
+│   └── setup-project.sh   # Per-project setup
 ├── stacks/                # Stack-specific configs
-├── research/              # Deep research (optional reading)
-└── setup-symlinks.sh
+│   ├── opencode/
+│   ├── codex/
+│   └── claude/
+├── research/              # Deep research (optional)
+└── docs/                  # Guides and checklists
 ```
 
 ---
@@ -88,12 +98,12 @@ cd ~/work/agent
 
 ## What's Included
 
-**32 Skills** (auto-trigger):
-- Development: commit-and-push, test-and-verify, frontend-design
+**26 Skills** (auto-trigger):
+- Dev Workflow: ship, commit-and-push, test-and-verify, pullrequest
+- Frontend: frontend-design, accessibility, best-practices
 - Next.js: next-best-practices, next-upgrade
-- SEO: seo, seo-audit, programmatic-seo
-- Product: page-cro, product-strategy
-- + 23 more
+- SEO: seo, programmatic-seo, competitor-alternatives
+- + 16 more (see skills/README.md)
 
 **3 Harnesses Unified**:
 - OpenCode
@@ -107,7 +117,8 @@ cd ~/work/agent
 ## Stats
 
 ```
-✅ 32 skills (all stacks)
+✅ 26 skills (all stacks)
+✅ 5 reference docs (knowledge base)
 ✅ 3 harnesses unified  
 ✅ 1 source of truth
 ✅ 0 orchestrators
@@ -121,8 +132,11 @@ cd ~/work/agent
 **Essential:**
 1. AGENTS.md - Core rules
 2. QUICK-REFERENCE.md - Daily cheatsheet
+3. SETUP.md - Complete setup guide
 
-**Optional:**
+**For Reference:**
+- skills/README.md - Complete skills catalog
+- CHANGELOG.md - Version history
 - research/ - Deep research on AI dev practices
 
 **Keep it simple. Ship fast. Stay in control.**

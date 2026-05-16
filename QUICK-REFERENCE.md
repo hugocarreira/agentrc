@@ -4,7 +4,7 @@
 
 ### Simple Tasks
 ```bash
-claude
+# Start your AI agent (opencode/codex/claude)
 "add login button"
 "look at ../other-project and do same for sessions"
 [screenshot] "fix this padding"
@@ -12,7 +12,7 @@ claude
 
 ### Complex Tasks
 ```bash
-claude
+# Start your AI agent
 "I want to add OAuth. Interview me about implementation,
 edge cases, design decisions. Ask one question at a time.
 When done, write spec to docs/plans/oauth.md"

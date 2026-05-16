@@ -88,8 +88,7 @@ case $OPTION in
         echo "  #   3. Add 'Out of Scope' rules"
         echo "  #   4. Keep it SHORT (50-100 lines)"
         echo ""
-        echo "Then start:"
-        echo "  claude"
+        echo "Then start your AI"
         ;;
         
     2)
@@ -137,8 +136,7 @@ case $OPTION in
         echo "  # (Global config already covers common rules)"
         echo "  # Keep only project-specific stuff"
         echo ""
-        echo "Then start:"
-        echo "  claude"
+        echo "Then start your AI"
         ;;
         
     3)

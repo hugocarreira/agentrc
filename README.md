@@ -1,8 +1,8 @@
-# 🤖 Centralized AI Agent Configuration
+# 🤖 AI Agent Configuration
 
 **Single source of truth for OpenCode, Codex, and Claude Code**
 
-This repository centralizes ALL agent configurations, skills, and scripts across multiple AI coding harnesses.
+**Philosophy**: Just talk to it. No orchestrators, no charades, no plan mode theater.
 
 ---
 
@@ -10,212 +10,165 @@ This repository centralizes ALL agent configurations, skills, and scripts across
 
 ```
 ~/work/agent/
-├── AGENTS-GLOBAL.md          # Orchestrator-based rules (for OpenCode)
-├── RTK.md                     # Token optimization CLI rules
-├── AGENTS.template.md         # Template for project-specific configs
-├── CHANGELOG.md               # History of changes
+├── AGENTS.md              # Core rules (simple!)
+├── RTK.md                 # Token optimization
+├── AGENTS.template.md     # Template for projects
 │
-├── agents/                    # Specialized agent definitions
-│   ├── orchestrator.md
-│   ├── frontend-developer.md
-│   ├── backend-developer.md
-│   ├── designer-ui-ux.md
-│   ├── devops-engineer.md
-│   ├── product-manager.md
-│   ├── marketing-growth.md
-│   ├── code-reviewer.md
-│   ├── security-auditor.md
-│   └── technical-writer.md
-│
-├── skills/                    # Reusable workflow skills (32 skills)
-│   ├── accessibility/
-│   ├── agent-browser/
-│   ├── best-practices/
+├── skills/                # 32 reusable workflows
 │   ├── commit-and-push/
-│   ├── frontend-design/
-│   ├── pullrequest/
-│   ├── security-best-practices/
 │   ├── test-and-verify/
-│   └── ... (28 more)
+│   ├── frontend-design/
+│   └── ... (29 more)
 │
-├── plugins/                   # Harness plugins
-│   └── rtk.ts                # RTK token optimizer plugin
+├── plugins/              
+│   └── rtk.ts            # RTK plugin
 │
-├── docs/                      # Documentation
+├── docs/
 │   ├── shipping-checklist.md
 │   └── refactoring-guide.md
 │
-├── scripts/                   # Helper scripts
-│   └── (portable helpers)
+├── stacks/               # Stack-specific configs
+│   ├── opencode/AGENTS.md
+│   ├── codex/AGENTS.md
+│   └── claude/CLAUDE.md
 │
-├── stacks/                    # Stack-specific configs
-│   ├── opencode/
-│   │   └── AGENTS.md         # → ~/.config/opencode/AGENTS.md
-│   ├── codex/
-│   │   └── AGENTS.md         # → ~/.codex/AGENTS.md
-│   └── claude/
-│       └── CLAUDE.md         # → ~/.claude/CLAUDE.md
-│
-└── setup-symlinks.sh          # Automated symlink setup
+└── setup-symlinks.sh     # Auto-setup
 ```
 
 ---
 
 ## 🚀 Quick Setup
 
-### 1. Run Automated Setup
 ```bash
 cd ~/work/agent
 ./setup-symlinks.sh
 ```
 
-This will:
-- Backup existing configs
-- Create symlinks from all stacks to `~/work/agent`
-- Centralize skills, agents, and configs
-
-### 2. Verify Setup
-```bash
-# Check symlinks
-ls -la ~/.config/opencode/AGENTS.md
-ls -la ~/.codex/AGENTS.md
-ls -la ~/.claude/CLAUDE.md
-ls -la ~/.claude/skills
+This creates symlinks:
 ```
+~/.config/opencode/AGENTS.md → ~/work/agent/stacks/opencode/AGENTS.md
+~/.codex/AGENTS.md           → ~/work/agent/stacks/codex/AGENTS.md
+~/.claude/CLAUDE.md          → ~/work/agent/stacks/claude/CLAUDE.md
 
-### 3. Test It
-```bash
-# From any AI coding harness:
-# OpenCode, Codex, or Claude Code should now load centralized configs
+All skills:                  → ~/work/agent/skills/
 ```
 
 ---
 
-## 🎯 How It Works
+## 🎯 Philosophy
 
-### Centralized Configuration
-All three stacks now read from the same source:
+### What This IS
+✅ **Simple, direct rules** based on what actually works
+✅ **Senior engineering practices** (tests, docs, git, planning)
+✅ **Just talk to it** - short prompts, natural conversation
+✅ **Token efficiency** - RTK everywhere
+✅ **Cross-reference** - reuse patterns from other projects
+✅ **Iterate fast** - 80% building, 20% refactoring
 
-```
-OpenCode reads:
-  ~/.config/opencode/AGENTS.md → ~/work/agent/stacks/opencode/AGENTS.md
-                                    ↓ (reads global)
-                               ~/work/agent/AGENTS-GLOBAL.md
-
-Codex reads:
-  ~/.codex/AGENTS.md → ~/work/agent/stacks/codex/AGENTS.md
-                         ↓ (includes)
-                      ~/work/agent/RTK.md
-
-Claude reads:
-  ~/.claude/CLAUDE.md → ~/work/agent/stacks/claude/CLAUDE.md
-                          ↓ (includes)
-                       ~/work/agent/RTK.md
-
-All stacks share:
-  ~/.{opencode,codex,claude}/skills → ~/work/agent/skills/
-```
-
-### Stack-Specific Behavior
-
-**OpenCode** (Orchestrator-first)
-- Uses specialized agents for domain work
-- Follows AGENTS-GLOBAL.md orchestrator rules
-- Delegates to `frontend-developer`, `backend-developer`, etc.
-
-**Codex** (Peter Steinberger workflow)
-- "Just Talk To It" philosophy
-- Short prompts + screenshots
-- Blast radius thinking
-- 80% building / 20% refactoring
-
-**Claude Code** (Conversational)
-- Natural language prompts
-- Iterate fast approach
-- Test in same context
-- Queue continue messages
-
-### Shared Skills
-All 32 skills are available to all stacks:
-
-**Development**
-- `commit-and-push`, `pullrequest`, `test-and-verify`
-- `frontend-design`, `best-practices`, `security-best-practices`
-
-**AI/Browser**
-- `agent-browser`, `simplify`
-
-**Next.js**
-- `next-best-practices`, `next-cache-components`, `next-upgrade`
-
-**SEO/Marketing**
-- `seo`, `seo-audit`, `programmatic-seo`
-- `marketing-ideas`, `marketing-psychology`
-
-**CRO/Product**
-- `page-cro`, `signup-flow-cro`, `onboarding-cro`
-- `product-strategy`, `product-marketing-context`
-
-**Design/Performance**
-- `premium-saas-design`, `web-design-guidelines`
-- `accessibility`, `core-web-vitals`, `performance`
+### What This IS NOT
+❌ **No orchestrator** - no delegation theater
+❌ **No plan mode charades** - just write to `docs/*.md` if needed
+❌ **No RAG systems** - model searches fine
+❌ **No subagent spawning** - keep it simple
+❌ **No elaborate prompts** - short and effective
+❌ **No over-engineering** - KISS principle
 
 ---
 
-## 📝 Usage Patterns
+## 💡 Core Principles
 
-### In Projects
-Create project-specific `AGENTS.md`:
-
-```markdown
-READ ~/work/agent/AGENTS-GLOBAL.md BEFORE ANYTHING (skip if missing).
-
-# My Project - Specific Rules
-
-## Stack
-- TypeScript + Next.js 15
-- PostgreSQL + Prisma
-- Tailwind CSS
-
-## Conventions
-- Use `pnpm` not `npm`
-- API routes in `app/api/`
-- Components in `components/`
-
-## Out of Scope
-- Never modify `lib/billing/` (legacy system)
-```
-
-### Discovering New Patterns
-When you find a useful pattern:
-
+### Just Talk To It (Peter Steinberger)
 ```bash
-cd ~/work/agent
+# ✅ Good
+"add login button"
+"look at ../vibetunnel and do same for sessions"
+[screenshot] "fix this padding"
 
-# Add to global rules
-nano AGENTS-GLOBAL.md
-
-# Or create a new skill
-mkdir skills/my-new-skill
-nano skills/my-new-skill/SKILL.md
-
-# Commit
-git add .
-git commit -m "feat: add new pattern X"
+# ❌ Over-engineered
+"I need you to carefully analyze the authentication system,
+decompose the task into subtasks, delegate to specialized agents..."
 ```
 
-### Cross-Stack Updates
-Edit once, applies everywhere:
+### Shipping at Inference-Speed
+- Expect code works out-of-the-box (one-shot)
+- Watch the stream, don't read every line
+- Trust when context is solid
 
+### Blast Radius Thinking
+Before starting:
+- How many files?
+- How long?
+- Parallel or sequential?
+
+### What Actually Works (Simon Willison)
+Senior engineering practices that LLMs amplify:
+- **Automated testing** (write in same context!)
+- **Good documentation** (`docs/` folder)
+- **Version control** (atomic commits)
+- **Planning** (simple, iterative)
+- **Code review** culture
+- **Manual QA** skills
+- **Research** abilities
+
+---
+
+## 🛠️ Usage
+
+### Daily Workflow
 ```bash
-# Update RTK config
-nano ~/work/agent/RTK.md
-# ✅ Both Codex and Claude see the change immediately
+# Start naturally
+"implement user auth"
 
-# Add new skill
-cp -r my-skill ~/work/agent/skills/
-# ✅ OpenCode, Codex, and Claude all discover it
+# Model reads:
+# 1. ~/work/agent/AGENTS.md (core rules)
+# 2. ~/work/agent/RTK.md (token optimization)
+# 3. Project's AGENTS.md (if exists)
+# 4. Relevant code
+
+# Implements → Tests (same context!) → Commits
 ```
+
+### Cross-Reference Projects
+```bash
+"look at ../other-project and do the same"
+"check how we solved X in ../vibetunnel"
+```
+
+Model is excellent at reusing patterns.
+
+### Add to Projects
+```bash
+cd ~/work/my-project
+cp ~/work/agent/AGENTS.template.md AGENTS.md
+# Edit with project specifics
+```
+
+---
+
+## 📊 What's Included
+
+### 32 Skills (All Stacks)
+**Development**: commit-and-push, pullrequest, test-and-verify, frontend-design, best-practices
+
+**Next.js**: next-best-practices, next-cache-components, next-upgrade
+
+**SEO/Marketing**: seo, seo-audit, programmatic-seo, marketing-ideas
+
+**Product/CRO**: page-cro, signup-flow-cro, onboarding-cro, product-strategy
+
+**Design/Performance**: premium-saas-design, accessibility, core-web-vitals
+
+**+ 17 more** in `skills/` folder
+
+### Stack Behaviors
+
+**OpenCode**: No orchestrator, just direct conversation + skills
+
+**Codex**: Peter Steinberger workflow (short prompts + screenshots)
+
+**Claude**: Conversational iteration, queue continue messages
+
+All share: RTK, skills, core principles
 
 ---
 
@@ -223,87 +176,103 @@ cp -r my-skill ~/work/agent/skills/
 
 ### Update Global Rules
 ```bash
-cd ~/work/agent
-nano AGENTS-GLOBAL.md
-git commit -am "refactor: update orchestrator rules"
+nano ~/work/agent/AGENTS.md
+git commit -am "refactor: simplify X"
 ```
+✅ All stacks see the change
 
 ### Add New Skill
 ```bash
-cd ~/work/agent/skills
-mkdir my-new-workflow
-cat > my-new-workflow/SKILL.md <<'EOF'
----
-name: "my-new-workflow"
-description: "Short trigger phrase"
----
-
-# My New Workflow
-
-[skill content]
-EOF
+mkdir ~/work/agent/skills/my-workflow
+nano ~/work/agent/skills/my-workflow/SKILL.md
 ```
+✅ Auto-discovered by all harnesses
 
-### Backup Before Changes
+### Stack-Specific Tweak
 ```bash
-# The setup script auto-backs up on each run
-./setup-symlinks.sh
-# Creates .backup.{timestamp} files
+nano ~/work/agent/stacks/{opencode,codex,claude}/*.md
 ```
 
-### Verify Symlinks
+### Re-run Setup
 ```bash
-# Check all symlinks are intact
-ls -la ~/.config/opencode/{AGENTS.md,skills,agents,plugins}
-ls -la ~/.codex/{AGENTS.md,RTK.md,skills}
-ls -la ~/.claude/{CLAUDE.md,AGENTS.md,RTK.md,skills}
+./setup-symlinks.sh  # Safe, auto-backs up
 ```
 
 ---
 
-## 🎓 Philosophy
+## 📝 Project Template
 
-### Peter Steinberger Principles
-- **Just Talk To It**: Short prompts, natural conversation
-- **Shipping at Inference-Speed**: Code works out-of-the-box
-- **Blast Radius Thinking**: Know impact before starting
-- **Iterate Fast, Refactor Smart**: 80/20 rule
-- **CLIs > MCPs**: Native tools over context pollution
-- **Test in Same Context**: Find bugs immediately
+```markdown
+READ ~/work/agent/AGENTS.md BEFORE ANYTHING.
 
-### Orchestrator Architecture (OpenCode)
-- **Single Entry Point**: Orchestrator handles all requests
-- **Agents Stay in Lane**: No domain overlap
-- **Structured Reporting**: Clear handoffs
-- **Quality Gates**: Code review before shipping
-- **Contracts Are Law**: Shared interfaces defined upfront
+# My Project
 
-### Universal Rules
-- Token efficiency (RTK everywhere)
-- Conventional Commits
-- Tests for business logic
-- No secrets in code
-- Security by default
+## Stack
+- TypeScript + Next.js 15
+- PostgreSQL + Prisma
+- Tailwind CSS
 
----
+## Commands
+- Test: `bun test`
+- Lint: `bun run lint`
+- Dev: `bun dev`
 
-## 📊 Stats
+## Conventions
+- Use `bun` not `npm`
+- API routes in `app/api/`
 
-- **3 AI Harnesses**: OpenCode (primary), Codex, Claude Code
-- **32 Skills**: Accessible to all stacks
-- **10 Specialized Agents**: For orchestrated workflows
-- **1 Source of Truth**: `~/work/agent`
+## Out of Scope
+- Never touch `lib/billing/`
+```
 
 ---
 
-## 🚦 Next Steps
+## 🎓 Inspired By
 
-1. ✅ Run `./setup-symlinks.sh`
-2. ✅ Verify symlinks are created
-3. ✅ Test with your preferred harness
-4. 📝 Customize stack-specific configs if needed
-5. 🔄 Commit changes to git
+- **[Peter Steinberger](https://steipete.me)** - "Just Talk To It", shipping at inference-speed
+- **[Simon Willison](https://simonwillison.net)** - Vibe engineering, senior practices
+- **[Armin Ronacher](https://lucumr.pocoo.org)** - Plan mode is just a prompt
 
 ---
 
-**Maintainer**: This structure is inspired by [Peter Steinberger's agent-scripts](https://github.com/steipete/agent-scripts) and adapted for multi-stack workflows.
+## 📈 Stats
+
+```
+✅ 32 skills (all stacks)
+✅ 3 harnesses unified  
+✅ 1 source of truth
+✅ 0 orchestrators
+✅ 0 charades
+```
+
+---
+
+## ✅ Verify Setup
+
+```bash
+# Check symlinks exist
+ls -la ~/.config/opencode/AGENTS.md
+ls -la ~/.codex/AGENTS.md
+ls -la ~/.claude/CLAUDE.md
+
+# All should point to ~/work/agent/stacks/*
+readlink ~/.config/opencode/AGENTS.md
+readlink ~/.codex/AGENTS.md  
+readlink ~/.claude/CLAUDE.md
+
+# Skills shared
+ls ~/work/agent/skills/
+```
+
+---
+
+## 🚀 Next Steps
+
+1. ✅ Test with your primary harness
+2. ✅ Add `AGENTS.md` to your projects
+3. ✅ Discover and refine patterns as you work
+4. ✅ Keep it simple
+
+---
+
+**Just talk to it. Ship fast. Stay in control.**

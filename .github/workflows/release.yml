@@ -2,8 +2,7 @@ name: release
 
 on:
   push:
-    tags:
-      - "cli/v*.*.*"
+    branches: [main]
 
 permissions:
   contents: write
@@ -21,6 +20,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
+      - name: Set auto-version
+        run: echo "GORELEASER_CURRENT_TAG=v0.0.$(git rev-list --count HEAD)" >> $GITHUB_ENV
       - uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser

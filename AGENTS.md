@@ -38,6 +38,68 @@ Performance degrades as context fills.
 
 ---
 
+## Coding Principles (Karpathy)
+
+**Anti-patterns LLMs fall into:**
+- Make wrong assumptions, run with them without checking
+- Overcomplicate (1000 lines when 100 would do)
+- Touch orthogonal code they don't understand
+- Don't manage confusion, don't push back
+
+### 1. Think Before Coding
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+- State assumptions explicitly. If uncertain, ask.
+- Multiple interpretations? Present them - don't pick silently.
+- Simpler approach exists? Say so. Push back.
+- Something unclear? Stop. Name confusion. Ask.
+
+### 2. Simplicity First
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked
+- No abstractions for single-use code
+- No "flexibility" not requested
+- No error handling for impossible scenarios
+- 200 lines could be 50? Rewrite it.
+
+**Test:** Would senior engineer say this is overcomplicated? If yes, simplify.
+
+### 3. Surgical Changes
+**Touch only what you must. Clean up only your own mess.**
+
+Editing existing code:
+- Don't "improve" adjacent code/comments/formatting
+- Don't refactor things that aren't broken
+- Match existing style
+- Notice dead code? Mention it - don't delete
+
+Your changes create orphans:
+- Remove imports/vars/functions YOUR changes made unused
+- Don't remove pre-existing dead code
+
+**Test:** Every changed line traces directly to user's request.
+
+### 4. Goal-Driven Execution
+**Define success criteria. Loop until verified.**
+
+Transform tasks to verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, make them pass"
+- "Fix bug" → "Write test that reproduces it, make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+Multi-step tasks - state plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+```
+
+Strong criteria = independent loops. Weak ("make it work") = constant clarification.
+
+**Working signs:** Fewer unnecessary diffs, less overcomplication, questions before mistakes.
+
+---
+
 ## What Works
 
 ### Automated Testing

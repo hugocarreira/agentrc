@@ -34,7 +34,6 @@ ls -la ~/.claude/skills/
 
 ### 2. Per-Project Setup
 
-**Interactive (recommended):**
 ```bash
 cd ~/work/agent
 ./scripts/setup-project.sh
@@ -45,16 +44,7 @@ cd ~/work/agent
 # - Option 2: Existing project (add global reference)
 ```
 
-**Or use individual scripts:**
-```bash
-# New project
-./scripts/setup-new-project.sh <project-name>
-
-# Existing project
-./scripts/setup-existing-project.sh <project-name>
-```
-
-**Note:** All scripts assume your projects are in `~/work/`
+**Note:** Script assumes your projects are in `~/work/`
 
 ---
 
@@ -201,22 +191,12 @@ All scripts in `~/work/agent/scripts/`:
 - Creates symlinks for all 3 harnesses
 - Usage: `./scripts/setup-symlinks.sh`
 
-**setup-project.sh** (recommended)
+**setup-project.sh**
 - Interactive project setup
-- Prompts for project name and option
+- Prompts for project name and option (new/existing)
 - Detects existing AGENTS.md automatically
+- Backs up existing files
 - Usage: `./scripts/setup-project.sh`
-
-**setup-new-project.sh <name>**
-- For new projects (no AGENTS.md)
-- Copies AGENTS.template.md to ~/work/<name>/
-- Usage: `./scripts/setup-new-project.sh my-app`
-
-**setup-existing-project.sh <name>**
-- For existing projects (has AGENTS.md)
-- Adds global reference line at top
-- Backs up original file
-- Usage: `./scripts/setup-existing-project.sh my-app`
 
 ---
 
@@ -227,7 +207,7 @@ All scripts in `~/work/agent/scripts/`:
 2. Verify symlinks
 
 **Per project:**
-1. `./scripts/setup-new-project.sh <name>` OR `./scripts/setup-existing-project.sh <name>`
+1. `./scripts/setup-project.sh` (interactive)
 2. Edit AGENTS.md (pick stack, add commands)
 3. Keep short (50-100 lines)
 

@@ -24,9 +24,7 @@ Centralized AI agent environment for 3 harnesses (opencode, codex, claude) with 
 
 **Automation**
 - `setup-symlinks.sh` - global setup (one-time)
-- `setup-project.sh` - interactive project setup
-- `setup-new-project.sh` - direct new project setup
-- `setup-existing-project.sh` - add to existing projects
+- `setup-project.sh` - interactive project setup (new or existing)
 
 **Skills** (24 total)
 - Dev Workflow: 5 skills (agent-browser, commit-and-push, pullrequest, test-and-verify, simplify)
@@ -95,7 +93,7 @@ Centralized AI agent environment for 3 harnesses (opencode, codex, claude) with 
 - 31 commits
 - 24 skills (was 32)
 - 5 reference docs
-- 4 automation scripts
+- 2 automation scripts
 - 3 unified stacks
 - 6 core documentation files
 

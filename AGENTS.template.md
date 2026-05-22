@@ -2,6 +2,14 @@ READ ~/work/agent/AGENTS.md BEFORE ANYTHING.
 
 # [Project Name]
 
+**Core Principles:**
+- Think Before Coding (don't assume, surface tradeoffs)
+- Simplicity First (min code, no speculation)
+- Surgical Changes (touch only what's needed)
+- Goal-Driven (define success, loop until verified)
+
+---
+
 ## Stack
 
 Pick your stack or mix:

@@ -40,18 +40,9 @@ if [ -f "$HOME/.config/opencode/AGENTS.md" ] && [ ! -L "$HOME/.config/opencode/A
     mv "$HOME/.config/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md.backup.$(date +%s)"
 fi
 
-# Generate AGENTS.md (concatenate core files so opencode reads full content)
-echo "  ↳ Generating AGENTS.md"
+echo "  ↳ Linking AGENTS.md"
 rm -f "$HOME/.config/opencode/AGENTS.md"
-{
-    if command -v rtk &>/dev/null; then
-        cat "$AGENT_ROOT/RTK.md"
-        echo ""
-        echo "---"
-        echo ""
-    fi
-    cat "$AGENT_ROOT/AGENTS.md"
-} > "$HOME/.config/opencode/AGENTS.md"
+ln -sf "$AGENT_ROOT/stacks/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
 echo "  ↳ Linking skills/"
 rm -rf "$HOME/.config/opencode/skills"

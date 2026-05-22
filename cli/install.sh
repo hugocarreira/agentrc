@@ -37,6 +37,38 @@ detect_platform() {
 	echo "${os}-${arch}"
 }
 
+# ── PATH check + done message ────────────────────────────────────────
+finalize() {
+	if ! echo "${PATH}" | tr ':' '\n' | grep -qxF "${INSTALL_DIR}"; then
+		echo ""
+		warn "${INSTALL_DIR} is not in your PATH. Add:"
+		echo ""
+		echo -e "    ${GREEN}export PATH=\"\${HOME}/.local/bin:\${PATH}\"${NC}"
+		echo ""
+	fi
+	echo ""
+	echo -e "${GREEN}  ✓ Installation complete!${NC}"
+	echo ""
+	echo "  Run: agentrc setup"
+	echo ""
+}
+
+# ── Source build fallback ────────────────────────────────────────────
+build_from_source() {
+	warn "Binary download failed — trying source build..."
+	if ! command -v go &>/dev/null; then
+		die "Go not found. Install Go (https://go.dev/dl/) or download from:"
+		die "  https://github.com/${REPO}/releases"
+	fi
+	tmpdir=$(mktemp -d)
+	trap "rm -rf ${tmpdir}" EXIT
+	cd "${tmpdir}"
+	GOBIN="${INSTALL_DIR}" go install "${REPO}/cli/cmd/agentrc@main" || die "go install failed"
+	ok "Installed → ${INSTALL_DIR}/agentrc (source build)"
+	finalize
+}
+
+# ── Main ─────────────────────────────────────────────────────────────
 main() {
 	echo ""
 	echo -e "${CYAN}  agentrc — installer${NC}"
@@ -47,7 +79,6 @@ main() {
 
 	platform=$(detect_platform)
 	binary_name="agentrc-${platform}"
-
 	url="${RELEASES_URL}/${binary_name}"
 	info "Platform : ${platform}"
 	info "Download : ${url}"
@@ -56,9 +87,9 @@ main() {
 	trap "rm -f ${tmpfile}" EXIT
 
 	if command -v curl &>/dev/null; then
-		curl -fsSL --progress-bar -o "${tmpfile}" "${url}" || die "Download failed: ${url}"
+		curl -fsSL --progress-bar -o "${tmpfile}" "${url}" || { build_from_source; return; }
 	elif command -v wget &>/dev/null; then
-		wget -q --show-progress -O "${tmpfile}" "${url}" || die "Download failed: ${url}"
+		wget -q --show-progress -O "${tmpfile}" "${url}" || { build_from_source; return; }
 	else
 		die "Neither curl nor wget found."
 	fi
@@ -71,23 +102,10 @@ main() {
 
 	chmod +x "${tmpfile}"
 	mkdir -p "${INSTALL_DIR}"
-cp "${tmpfile}" "${INSTALL_DIR}/agentrc"
-ok "Installed → ${INSTALL_DIR}/agentrc"
+	cp "${tmpfile}" "${INSTALL_DIR}/agentrc"
+	ok "Installed → ${INSTALL_DIR}/agentrc"
 
-	# PATH warning
-	if ! echo "${PATH}" | tr ':' '\n' | grep -qxF "${INSTALL_DIR}"; then
-		echo ""
-		warn "${INSTALL_DIR} is not in your PATH. Add:"
-		echo ""
-		echo -e "    ${GREEN}export PATH=\"\${HOME}/.local/bin:\${PATH}\"${NC}"
-		echo ""
-	fi
-
-	echo ""
-	echo -e "${GREEN}  ✓ Installation complete!${NC}"
-	echo ""
-	echo "  Run: agentrc setup"
-	echo ""
+	finalize
 }
 
 main "$@"

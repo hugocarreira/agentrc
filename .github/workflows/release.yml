@@ -8,20 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: cli
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: stable
-      - run: go test ./... -count=1
-
   goreleaser:
-    needs: test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,6 +20,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
+      - run: go test ./... -count=1
       - name: Set auto-version
         run: echo "GORELEASER_CURRENT_TAG=v0.0.$(git rev-list --count HEAD)" >> $GITHUB_ENV
       - uses: goreleaser/goreleaser-action@v6

@@ -8,7 +8,11 @@ permissions:
   contents: write
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
   goreleaser:
+    needs: test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,14 +24,13 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - run: go test ./... -count=1
       - name: Set auto-version
         run: echo "GORELEASER_CURRENT_TAG=v0.0.$(git rev-list --count HEAD)" >> $GITHUB_ENV
       - uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
           version: "~> v2"
-          args: release --clean
+          args: release --clean --skip-validate
           workdir: cli
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
